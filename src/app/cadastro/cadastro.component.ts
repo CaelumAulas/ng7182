@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { FotoComponent } from './../foto/foto.component';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'cadastro',
-  template: `
-    <p>
-      cadastro works!
-    </p>
-  `,
-  styles: []
+  templateUrl: 'cadastro.component.html'
 })
-export class CadastroComponent implements OnInit {
+export class CadastroComponent {
 
-  constructor() { }
+  foto = new FotoComponent()
 
-  ngOnInit() {
+  constructor(){}
+
+  salvar(evento: Event){
+
+    evento.preventDefault()
+
+    
+    
   }
 
 }
