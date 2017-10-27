@@ -3,10 +3,12 @@
         Cadastro
     </h1>
 </header>
-
-{{foto.titulo}}
-
 <article class="container">
+    <div class="row" *ngIf="mensagem">
+        <p class="alert alert-success">
+            {{mensagem}}
+        </p>
+    </div>
     <div class="row">
         <form class="col-sm-6" (submit)="salvar($event)">
 
@@ -32,7 +34,11 @@
         </form>
 
         <aside class="col-sm-4">
-            <!-- preview  -->
+            <h3>Preview</h3>
+            
+            <painel *ngIf="foto.titulo" titulo="{{foto.titulo}}">
+                <foto url="{{foto.url}}" titulo="{{foto.titulo}}"></foto>
+            </painel>
         </aside>
     </div>
 </article>
