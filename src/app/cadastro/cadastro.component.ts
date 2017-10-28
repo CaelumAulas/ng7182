@@ -2,6 +2,7 @@ import { FotoComponent } from './../foto/foto.component';
 import { Component } from '@angular/core';
 import { FotoService } from "./../servicos/foto.service";
 import { ActivatedRoute, Router } from "@angular/router";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
   selector: 'cadastro',
@@ -11,13 +12,27 @@ export class CadastroComponent {
 
   foto = new FotoComponent()
   mensagem: string = ''
+  formCadastro: FormGroup
 
   constructor(
      private servico: FotoService
     ,private rota: ActivatedRoute
     ,private roteamento: Router
+    ,private formBuilder: FormBuilder
   )
   {
+
+    this.formCadastro = formBuilder.group({
+      
+      titulo: ['', Validators.compose([
+          Validators.required,
+          Validators.minLength(3)
+      ])],
+
+      url: ['', Validators.required],
+      
+      descricao: ''
+    })
 
 
     this.rota.params.subscribe(
@@ -47,9 +62,9 @@ export class CadastroComponent {
     if(this.foto._id){
         this.servico.atualizar(this.foto)
                     .subscribe(
-                      () => {
+                      mensagemServico => {
 
-                        this.mensagem = `Foto ${this.foto.titulo} alterada com sucesso`
+                        this.mensagem = mensagemServico.texto              
 
                         setTimeout(
                           () => {
